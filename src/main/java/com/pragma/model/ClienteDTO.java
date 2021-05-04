@@ -1,13 +1,8 @@
 package com.pragma.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-
 public class ClienteDTO {
 	
-	private int numIdentificiacion;
+	private int numIdentificacion;
 	
 	private String tipoIdentificacion;
 	
@@ -21,12 +16,12 @@ public class ClienteDTO {
 	
 	private String foto;
 
-	public int getNumIdentificiacion() {
-		return numIdentificiacion;
+	public int getNumIdentificacion() {
+		return numIdentificacion;
 	}
 
-	public void setNumIdentificiacion(int numIdentificiacion) {
-		this.numIdentificiacion = numIdentificiacion;
+	public void setNumIdentificacion(int numIdentificacion) {
+		this.numIdentificacion = numIdentificacion;
 	}
 
 	public String getTipoIdentificacion() {

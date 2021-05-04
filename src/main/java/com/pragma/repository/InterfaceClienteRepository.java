@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pragma.model.Cliente;
 
-@Repository
+
 public interface InterfaceClienteRepository extends JpaRepository<Cliente, Integer> {
 	
 	List<Cliente> findByTipoIdentificacion( String tipoIdentificacion);

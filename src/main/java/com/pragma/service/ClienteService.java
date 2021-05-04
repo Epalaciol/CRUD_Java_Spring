@@ -1,6 +1,5 @@
-package com.prueba.service;
+package com.pragma.service;
 
-import java.awt.print.Printable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -43,7 +42,7 @@ public class ClienteService {
 			return new ClienteDTO();
 
 		} else {
-			ClienteDocumento clienteDocumentoBusqueda = documentoRepository.findByNumIdentificacion(id);
+			ClienteDocumento clienteDocumentoBusqueda = documentoRepository.findBynumIdentificacion(id);
 			ClienteDTO clienteSalida = armarClienteDTO(clienteBusqueda.get(), clienteDocumentoBusqueda);
 
 			return clienteSalida;
@@ -82,24 +81,7 @@ public class ClienteService {
 		
 	}
 
-	public List<ClienteDTO> armarClientesDTO(List<Cliente> cliente) {
-		List<ClienteDTO> salida = new ArrayList<>();
-
-		for (int i = 0; i < cliente.size(); i++) {
-
-			Cliente clienteTemporal = cliente.get(i);
-
-			ClienteDocumento clienteDocTemporal = documentoRepository
-					.findByNumIdentificacion(clienteTemporal.getNumIdentificiacion());
-
-			ClienteDTO clienteAnexar = armarClienteDTO(clienteTemporal, clienteDocTemporal);
-
-			salida.add(clienteAnexar);
-
-		}
-		return salida;
-
-	}
+	
 	public Boolean postClienteService(ClienteDTO cliente) {
 		
 		Cliente clienteGuardar = new Cliente();
@@ -107,12 +89,12 @@ public class ClienteService {
 		
 		clienteGuardar.setNombre(cliente.getNombre());
 		clienteGuardar.setApellido(cliente.getApellido());
-		clienteGuardar.setNumIdentificiacion(cliente.getNumIdentificiacion()); 
+		clienteGuardar.setNumIdentificacion(cliente.getNumIdentificacion()); 
 		clienteGuardar.setTipoIdentificacion(cliente.getTipoIdentificacion());
 		clienteGuardar.setCiudadNacimiento(cliente.getCiudadNacimiento());
 		clienteGuardar.setEdad(cliente.getEdad());
 		
-		clienteDocGuardar.setNumIdentificiacion(cliente.getNumIdentificiacion()); 
+		clienteDocGuardar.setNumIdentificacion(cliente.getNumIdentificacion());; 
 		clienteDocGuardar.setFoto(cliente.getFoto());
 		
 		try {
@@ -122,11 +104,70 @@ public class ClienteService {
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
 			return false;
+		}		
+		
+	}
+	
+	public Boolean putClienteService(ClienteDTO cliente) {
+		
+		Cliente clienteGuardar = new Cliente();
+		ClienteDocumento clienteDocGuardar = new ClienteDocumento();
+		
+		clienteGuardar.setNombre(cliente.getNombre());
+		clienteGuardar.setApellido(cliente.getApellido());
+		clienteGuardar.setNumIdentificacion(cliente.getNumIdentificacion()); 
+		clienteGuardar.setTipoIdentificacion(cliente.getTipoIdentificacion());
+		clienteGuardar.setCiudadNacimiento(cliente.getCiudadNacimiento());
+		clienteGuardar.setEdad(cliente.getEdad());
+		
+		clienteDocGuardar.setNumIdentificacion(cliente.getNumIdentificacion());; 
+		clienteDocGuardar.setFoto(cliente.getFoto());
+			
+		ClienteDocumento documentoEliminar = documentoRepository.findBynumIdentificacion(cliente.getNumIdentificacion());
+		documentoRepository.deleteByNumIdentificacion(documentoEliminar.getNumIdentificacion());
+		
+		try {
+			clienteRepository.save(clienteGuardar);
+			documentoRepository.save(clienteDocGuardar);
+			return true;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			return false;
+		}		
+		
+	}
+	
+	public Boolean deleteClienteService(Integer id) {
+		
+		try { 
+			clienteRepository.deleteById(id);
+			documentoRepository.deleteByNumIdentificacion(id);
+			return true;
+		}catch (Exception e) {
+			// TODO: handle exception
+			return false;
 		}
+		
+	}
+		
+	
+	public List<ClienteDTO> armarClientesDTO(List<Cliente> cliente) {
+		List<ClienteDTO> salida = new ArrayList<>();
 
-		
-		
-		
+		for (int i = 0; i < cliente.size(); i++) {
+
+			Cliente clienteTemporal = cliente.get(i);
+
+			ClienteDocumento clienteDocTemporal = documentoRepository
+					.findBynumIdentificacion(clienteTemporal.getNumIdentificacion());
+
+			ClienteDTO clienteAnexar = armarClienteDTO(clienteTemporal, clienteDocTemporal);
+
+			salida.add(clienteAnexar);
+
+		}
+		return salida;
+
 	}
 	
 	public ClienteDTO armarClienteDTO(Cliente cliente, ClienteDocumento clienteDocumento) {
@@ -134,7 +175,7 @@ public class ClienteService {
 
 		clienteSalida.setNombre(cliente.getNombre());
 		clienteSalida.setApellido(cliente.getApellido());
-		clienteSalida.setNumIdentificiacion(cliente.getNumIdentificiacion());
+		clienteSalida.setNumIdentificacion(cliente.getNumIdentificacion());
 		clienteSalida.setTipoIdentificacion(cliente.getTipoIdentificacion());
 		clienteSalida.setCiudadNacimiento(cliente.getCiudadNacimiento());
 		clienteSalida.setEdad(cliente.getEdad());

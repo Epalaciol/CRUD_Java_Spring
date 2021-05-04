@@ -5,10 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import com.pragma.model.ClienteDocumento;
 
-@Repository
+
 public interface InterfaceClienteDocumentoRepository extends MongoRepository<ClienteDocumento, Integer>{
 	
-	ClienteDocumento findByNumIdentificacion(Integer numIdentificacion);
+	ClienteDocumento findBynumIdentificacion(Integer numIdentificacion);
+	
+	void deleteByNumIdentificacion(Integer numIdentificacionInteger);
 	
 
 }

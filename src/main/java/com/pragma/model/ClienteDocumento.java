@@ -12,11 +12,11 @@ public class ClienteDocumento {
 	
 	private String foto;
 	
-	public int getNumIdentificiacion() {
+	public int getNumIdentificacion() {
 		return numIdentificacion;
 	}
 
-	public void setNumIdentificiacion(int numIdentificacion) {
+	public void setNumIdentificacion(int numIdentificacion) {
 		this.numIdentificacion = numIdentificacion;
 	}
 

@@ -6,6 +6,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Cliente {
+	
 	@Id
 	private int numIdentificacion;
 	
@@ -24,12 +25,12 @@ public class Cliente {
 	@Column(nullable = false)
 	private int edad;
 
-	public int getNumIdentificiacion() {
+	public int getNumIdentificacion() {
 		return numIdentificacion;
 	}
 
-	public void setNumIdentificiacion(int numIdentificiacion) {
-		this.numIdentificacion = numIdentificiacion;
+	public void setNumIdentificacion(int numIdentificacion) {
+		this.numIdentificacion = numIdentificacion;
 	}
 
 	public String getTipoIdentificacion() {
