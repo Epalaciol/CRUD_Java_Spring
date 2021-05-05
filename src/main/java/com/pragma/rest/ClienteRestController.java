@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -115,7 +116,7 @@ public class ClienteRestController {
 	@ApiResponse(code=409, message="Usuario ya existe en el sistema", response=String.class)
 	})
 	@PostMapping
-	public ResponseEntity<String> postCliente(@RequestBody ClienteDTO cliente) {
+	public ResponseEntity<String> postCliente(@Validated(value = ClienteDTO.class) @RequestBody ClienteDTO cliente) {
 		
 		Optional<Cliente> busqueda = clienteRepository.findById(cliente.getNumIdentificacion());
 		
@@ -147,7 +148,7 @@ public class ClienteRestController {
 		if(busqueda.isEmpty()) {
 			return new ResponseEntity<String>("El cliente no esta registrado en el sistema", HttpStatus.NOT_FOUND);
 		}
-		Boolean respuesta = servicio.putClienteService(cliente);
+		Boolean respuesta = servicio.putClienteService(id, cliente);
 		
 		if (respuesta) {
 			return new ResponseEntity<String>("Se ha modificado correctamente", HttpStatus.ACCEPTED); 

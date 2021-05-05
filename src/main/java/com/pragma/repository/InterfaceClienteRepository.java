@@ -1,6 +1,7 @@
 package com.pragma.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,5 +14,8 @@ public interface InterfaceClienteRepository extends JpaRepository<Cliente, Integ
 	List<Cliente> findByTipoIdentificacion( String tipoIdentificacion);
 
 	List<Cliente> findByEdadGreaterThan(Integer edad);
+	
+	Cliente findByNumIdentificacion(Integer id);
+	
 
 }

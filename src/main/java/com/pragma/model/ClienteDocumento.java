@@ -6,12 +6,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class ClienteDocumento {
-	
+
 	@Id
 	private int numIdentificacion;
-	
+
 	private String foto;
-	
+
 	public int getNumIdentificacion() {
 		return numIdentificacion;
 	}
@@ -28,5 +28,15 @@ public class ClienteDocumento {
 		this.foto = foto;
 	}
 
+	public ClienteDocumento() {
+	};
+
+	public ClienteDocumento(Integer id, String foto) {
+
+		this.numIdentificacion = id;
+
+		this.foto = foto;
+
+	}
 
 }

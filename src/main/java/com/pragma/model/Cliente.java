@@ -6,22 +6,22 @@ import javax.persistence.Id;
 
 @Entity
 public class Cliente {
-	
+
 	@Id
 	private int numIdentificacion;
-	
+
 	@Column(nullable = false)
 	private String tipoIdentificacion;
-	
+
 	@Column(nullable = false)
 	private String nombre;
-	
+
 	@Column(nullable = false)
 	private String apellido;
-	
+
 	@Column(nullable = false)
 	private String ciudadNacimiento;
-	
+
 	@Column(nullable = false)
 	private int edad;
 
@@ -72,7 +72,20 @@ public class Cliente {
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
-	
-	
+
+	public Cliente() {
+	};
+
+	public Cliente(Integer id, String tipoIdentificacion, String nombre, String apellido, String ciudadNacimiento,
+			Integer edad) {
+
+		this.numIdentificacion = id;
+		this.tipoIdentificacion = tipoIdentificacion;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.ciudadNacimiento = ciudadNacimiento;
+		this.edad = edad;
+
+	}
 
 }

@@ -108,7 +108,7 @@ public class ClienteService {
 		
 	}
 	
-	public Boolean putClienteService(ClienteDTO cliente) {
+	public Boolean putClienteService(Integer id,ClienteDTO cliente) {
 		
 		Cliente clienteGuardar = new Cliente();
 		ClienteDocumento clienteDocGuardar = new ClienteDocumento();
@@ -123,15 +123,14 @@ public class ClienteService {
 		clienteDocGuardar.setNumIdentificacion(cliente.getNumIdentificacion());; 
 		clienteDocGuardar.setFoto(cliente.getFoto());
 			
-		ClienteDocumento documentoEliminar = documentoRepository.findBynumIdentificacion(cliente.getNumIdentificacion());
-		documentoRepository.deleteByNumIdentificacion(documentoEliminar.getNumIdentificacion());
+		ClienteDocumento documentoEliminar = documentoRepository.findBynumIdentificacion(id);
+		documentoRepository.deleteByNumIdentificacion(id);
 		
 		try {
 			clienteRepository.save(clienteGuardar);
 			documentoRepository.save(clienteDocGuardar);
 			return true;
 		} catch (Exception e) {
-			System.out.print(e.getMessage());
 			return false;
 		}		
 		

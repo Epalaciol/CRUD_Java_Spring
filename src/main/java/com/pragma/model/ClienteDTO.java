@@ -72,6 +72,19 @@ public class ClienteDTO {
 		this.foto = foto;
 	}
 	
+	public ClienteDTO() {};
+	
+	public ClienteDTO(Integer id, String tipoIdentificacion, String nombre, String apellido, String ciudadNacimiento, Integer edad, String foto){
+		
+		this.numIdentificacion = id;
+		this.tipoIdentificacion = tipoIdentificacion;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.ciudadNacimiento = ciudadNacimiento;
+		this.edad = edad;
+		this.foto = foto;
+		
+	}
 	
 
 }
